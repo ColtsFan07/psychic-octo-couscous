@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LuceneBuilder": {
+      "commandName": "Project",
+      "commandLineArgs": "/i"
+    }
+  }
+}

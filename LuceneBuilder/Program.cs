@@ -15,8 +15,8 @@ namespace LuceneBuilder
             {
                 const string googleApiKey = "";
                 const string sqlConnStr = @"";
-                string sqlCmd = "insert into GEO_LCTN_LCNE (PLC_ID, FRMTD_ADDR, NELAT, NELON, SWLAT, SWLON) " +
-                                        "values(@PLC_ID, @FRMTD_ADDR, @NELAT, @NELON, @SWLAT, @SWLON)";
+                string sqlCmd = "insert into GEO_LCTN_LCNE (PLC_ID, ZIP_CD, FRMTD_ADDR, ZIP_CD, NELAT, NELON, SWLAT, SWLON) " +
+                                        "values(@PLC_ID, @ZIP_CD, @FRMTD_ADDR, @NELAT, @NELON, @SWLAT, @SWLON)";
 
                 string url = String.Format("https://maps.googleapis.com/maps/api/geocode/json?address=650+J+Street,+Lincoln,+NE&key={0}", googleApiKey);
 
@@ -32,8 +32,9 @@ namespace LuceneBuilder
                         string json = JsonConvert.DeserializeObject(reader.ReadToEnd()).ToString();
                         dynamic places = JObject.Parse(json);
 
-                        string formattedAddress = places.results[0].formatted_address;
                         string place_id = places.results[0].place_id;
+                        string formattedAddress = places.results[0].formatted_address;
+                        //string zip_cd = finish later
                         string nthestLat = places.results[0].geometry.viewport.northeast.lat;
                         string nthestLng = places.results[0].geometry.viewport.northeast.lng;
                         string sthwstLat = places.results[0].geometry.viewport.southwest.lat;
@@ -43,6 +44,7 @@ namespace LuceneBuilder
                         {
                             cmd.Parameters.AddWithValue("@PLC_ID", places.results[0].place_id.Value);
                             cmd.Parameters.AddWithValue("@FRMTD_ADDR", places.results[0].formatted_address.Value);
+                            //cmd.Parameters.AddWithValue("@ZIP_CD", places.results[0].formatted_address.Value);
                             cmd.Parameters.AddWithValue("@NELAT", places.results[0].geometry.viewport.northeast.lat.Value);
                             cmd.Parameters.AddWithValue("@NELON", places.results[0].geometry.viewport.northeast.lng.Value);
                             cmd.Parameters.AddWithValue("@SWLAT", places.results[0].geometry.viewport.southwest.lat.Value);

@@ -11,3 +11,4 @@ C:\Users\parha\source\repos\LuceneBuilder\LuceneBuilder\obj\Debug\netcoreapp2.0\
 C:\Users\parha\source\repos\LuceneBuilder\LuceneBuilder\bin\Debug\netcoreapp2.0\System.Web.Extensions.VisualStudio.15.0.dll
 C:\Users\parha\source\repos\LuceneBuilder\LuceneBuilder\obj\Debug\netcoreapp2.0\LuceneBuilder.csproj.CopyComplete
 C:\Users\parha\source\repos\LuceneBuilder\LuceneBuilder\bin\Debug\netcoreapp2.0\LuceneBuilder.dll.config
+C:\Users\parha\source\repos\LuceneBuilder\LuceneBuilder\obj\Debug\netcoreapp2.0\LuceneBuilder.csprojAssemblyReference.cache

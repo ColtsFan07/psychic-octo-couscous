@@ -16,7 +16,7 @@ namespace LuceneBuilder
         public void StartLuceneIndexCreateProcess()
         {
             string sqlConnStr = @ConfigurationManager.AppSettings["SqlConnectionString"];
-            string sqlCmd = "select ID, PLC_ID, FRMTD_ADDR, NELAT, NELON, SWLAT, SWLON FROM GEO_LCTN_LCNE ";
+            string sqlCmd = "select ID, PLC_ID, ZIP_CD, FRMTD_ADDR, NELAT, NELON, SWLAT, SWLON FROM GEO_LCTN ";
 
             SqlConnection sqlConn = new SqlConnection(sqlConnStr);
 
@@ -46,6 +46,7 @@ namespace LuceneBuilder
                         {
                             ID = Convert.ToInt16(sqlReader["ID"]),
                             PLC_ID = sqlReader["PLC_ID"].ToString(),
+                            ZIP_CD = sqlReader["ZIP_CD"].ToString(),
                             FRMTD_ADDR = sqlReader["FRMTD_ADDR"].ToString(),
                             NELAT = sqlReader["NELAT"].ToString(),
                             NELON = sqlReader["NELON"].ToString(),
@@ -80,6 +81,7 @@ namespace LuceneBuilder
                 Lucene.Net.Documents.Document doc = new Lucene.Net.Documents.Document();
                 doc.Add(new Lucene.Net.Documents.Field("ID", location.ID.ToString(), Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.ANALYZED));
                 doc.Add(new Lucene.Net.Documents.Field("PLC_ID", location.PLC_ID, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.ANALYZED));
+                doc.Add(new Lucene.Net.Documents.Field("ZIP_CD", location.ZIP_CD, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.ANALYZED));
                 doc.Add(new Lucene.Net.Documents.Field("FRMTD_ADDR", location.FRMTD_ADDR, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.ANALYZED));
                 doc.Add(new Lucene.Net.Documents.Field("NELAT", location.NELAT, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.ANALYZED));
                 doc.Add(new Lucene.Net.Documents.Field("NELON", location.NELON, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.ANALYZED));
